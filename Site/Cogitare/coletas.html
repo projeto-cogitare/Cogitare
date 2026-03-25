@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Locais de Coletas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0fff4;
+    }
+    .sidebar {
+      background-color: #d3f9d8;
+      padding: 20px;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .sidebar h2 {
+      font-weight: bold;
+      color: #1b4332;
+    }
+    #map {
+      height: 500px;
+      width: 100%;
+      border-radius: 8px;
+    }
+    .ponto-card {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .ponto-card h6 {
+      color: #1b4332;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .ponto-card p {
+      margin: 4px 0;
+      font-size: 0.9em;
+    }
+    .distancia-badge {
+      background-color: #40916c;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.85em;
+      display: inline-block;
+      margin-top: 5px;
+    }
+    .btn-localizacao {
+      background-color: #40916c;
+      color: white;
+      border: none;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    .btn-localizacao:hover {
+      background-color: #2d6a4f;
+      color: white;
+    }
+    .btn-adicionar {
+      background-color: #1b4332;
+      color: white;
+      border: none;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .btn-adicionar:hover {
+      background-color: #081c15;
+      color: white;
+    }
+    .form-adicionar {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      display: none;
+    }
+    .form-adicionar.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand" href="home.html">
+        <img src="imagens/logo.png" alt="Logo Cogitare" height="30">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link fw-bold" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="cadastro.html">Cadastro</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="coletas.html">Como descarta</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="medicamentosCadastro.html">Escanear</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-3 sidebar">
+        <h2>Locais de Coletas</h2>
+        
+        <!-- Botão para obter localização -->
+        <button class="btn btn-localizacao" onclick="obterLocalizacaoAtual()">
+          📍 Usar Minha Localização
+        </button>
+
+        <!-- Botão para mostrar formulário -->
+        <button class="btn btn-adicionar" onclick="toggleFormulario()">
+          ➕ Adicionar Ponto de Coleta
+        </button>
+
+        <!-- Formulário para adicionar ponto -->
+        <div class="form-adicionar" id="formAdicionar">
+          <h6>Novo Ponto de Coleta</h6>
+          <form onsubmit="adicionarPonto(event)">
+            <div class="mb-2">
+              <input type="text" class="form-control form-control-sm" id="nome" placeholder="Nome do local" required>
+            </div>
+            <div class="mb-2">
+              <input type="text" class="form-control form-control-sm" id="endereco" placeholder="Endereço completo" required>
+            </div>
+            <div class="row mb-2">
+              <div class="col-6">
+                <input type="number" step="any" class="form-control form-control-sm" id="latitude" placeholder="Latitude" required>
+              </div>
+              <div class="col-6">
+                <input type="number" step="any" class="form-control form-control-sm" id="longitude" placeholder="Longitude" required>
+              </div>
+            </div>
+            <div class="mb-2">
+              <select class="form-select form-select-sm" id="tipo">
+                <option value="farmacia">Farmácia</option>
+                <option value="ubs">UBS</option>
+                <option value="hospital">Hospital</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+            <div class="mb-2">
+              <input type="text" class="form-control form-control-sm" id="horario" placeholder="Horário (ex: 8h às 18h)">
+            </div>
+            <div class="mb-2">
+              <input type="tel" class="form-control form-control-sm" id="telefone" placeholder="Telefone">
+            </div>
+            <button type="submit" class="btn btn-success btn-sm w-100">Salvar</button>
+            <button type="button" class="btn btn-secondary btn-sm w-100 mt-1" onclick="toggleFormulario()">Cancelar</button>
+          </form>
+        </div>
+
+        <p class="mt-3"><strong>Postos de coleta próximos:</strong></p>
+        <div id="listaPontos">
+          <div class="border p-3 bg-white rounded">
+            <p><strong>Carregando pontos de coleta...</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-9 map-container p-4">
+        <h5>Mapa de Pontos de Coleta</h5>
+        <div id="map"></div>
+
+        <div class="mt-4">
+          <h4>Por que destinar <strong>remédios?</strong></h4>
+          <p>Remédios não descartados corretamente podem contaminar o solo e a água, além de representar riscos para a saúde de pessoas e animais.</p>
+          <a href="#">Clique aqui e saiba mais sobre descarte correto de medicamentos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Configuração da API
+    const API_URL = 'http://localhost:5000/api';
+    
+    // Inicializar mapa
+    var map = L.map('map').setView([-23.6039, -46.9196], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // Variável para armazenar marcadores
+    var marcadores = [];
+    var localizacaoUsuario = null;
+    var marcadorUsuario = null;
+
+    // Função para carregar todos os pontos
+    async function carregarPontos() {
+      try {
+        const response = await fetch(`${API_URL}/pontos-coleta`);
+        const data = await response.json();
+        
+        if (data.sucesso) {
+          exibirPontosNoMapa(data.pontos);
+          exibirPontosNaLista(data.pontos);
+        } else {
+          throw new Error(data.erro || 'Erro desconhecido');
+        }
+      } catch (error) {
+        console.error('Erro ao carregar pontos:', error);
+        document.getElementById('listaPontos').innerHTML = `
+          <div class="border p-3 bg-white rounded">
+            <p class="text-danger"><strong>Erro ao carregar pontos.</strong><br>
+            Verifique se o servidor Python está rodando em http://localhost:5000.</p>
+          </div>
+        `;
+      }
+    }
+
+    // Função para obter localização atual do usuário
+    function obterLocalizacaoAtual() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            
+            localizacaoUsuario = {lat, lng};
+            
+            // Adicionar marcador do usuário no mapa
+            if (marcadorUsuario) {
+              map.removeLayer(marcadorUsuario);
+            }
+            
+            var iconUsuario = L.icon({
+              iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+              shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+              iconSize: [25, 41],
+              iconAnchor: [12, 41],
+              popupAnchor: [1, -34],
+              shadowSize: [41, 41]
+            });
+            
+            marcadorUsuario = L.marker([lat, lng], {icon: iconUsuario})
+              .addTo(map)
+              .bindPopup("<b>Você está aqui</b>")
+              .openPopup();
+            
+            // Centralizar mapa na localização do usuário
+            map.setView([lat, lng], 13);
+            
+            // Preencher latitude e longitude no formulário
+            document.getElementById('latitude').value = lat.toFixed(6);
+            document.getElementById('longitude').value = lng.toFixed(6);
+            
+            // Carregar pontos próximos
+            await carregarPontosProximos(lat, lng);
+          },
+          (error) => {
+            alert('Não foi possível obter sua localização. Verifique as permissões do navegador.');
+            console.error('Erro de geolocalização:', error);
+          }
+        );
+      } else {
+        alert('Geolocalização não é suportada pelo seu navegador.');
+      }
+    }
+
+    // Função para carregar pontos próximos
+    async function carregarPontosProximos(lat, lng, raio = 10) {
+      try {
+        const response = await fetch(`${API_URL}/pontos-coleta/proximos?lat=${lat}&lng=${lng}&raio=${raio}`);
+        const data = await response.json();
+        
+        if (data.sucesso) {
+          exibirPontosNoMapa(data.pontos);
+          exibirPontosNaLista(data.pontos, true);
+        }
+      } catch (error) {
+        console.error('Erro ao carregar pontos próximos:', error);
+      }
+    }
+
+    // Função para exibir pontos no mapa
+    function exibirPontosNoMapa(pontos) {
+      // Remover marcadores anteriores
+      marcadores.forEach(m => map.removeLayer(m));
+      marcadores = [];
+      
+      // Adicionar novos marcadores
+      pontos.forEach(ponto => {
+        var marcador = L.marker([ponto.latitude, ponto.longitude])
+          .addTo(map)
+          .bindPopup(`
+            <b>${ponto.nome}</b><br>
+            ${ponto.endereco}<br>
+            <em>${ponto.tipo}</em><br>
+            ${ponto.horario_funcionamento ? `⏰ ${ponto.horario_funcionamento}<br>` : ''}
+            ${ponto.telefone ? `📞 ${ponto.telefone}` : ''}
+          `);
+        
+        marcadores.push(marcador);
+      });
+    }
+
+    // Função para exibir pontos na lista
+    function exibirPontosNaLista(pontos, mostrarDistancia = false) {
+      const listaPontos = document.getElementById('listaPontos');
+      
+      if (pontos.length === 0) {
+        listaPontos.innerHTML = `
+          <div class="border p-3 bg-white rounded">
+            <p><strong>Nenhum ponto de coleta encontrado.</strong><br>
+            ${mostrarDistancia ? 'Tente aumentar o raio de busca.' : 'Adicione um novo ponto de coleta.'}</p>
+          </div>
+        `;
+        return;
+      }
+      
+      listaPontos.innerHTML = pontos.map(ponto => `
+        <div class="ponto-card">
+          <h6>${ponto.nome}</h6>
+          <p>📍 ${ponto.endereco}</p>
+          <p>🏥 ${ponto.tipo}</p>
+          ${ponto.horario_funcionamento ? `<p>⏰ ${ponto.horario_funcionamento}</p>` : ''}
+          ${ponto.telefone ? `<p>📞 ${ponto.telefone}</p>` : ''}
+          ${mostrarDistancia && ponto.distancia ? `<span class="distancia-badge">${ponto.distancia} km</span>` : ''}
+        </div>
+      `).join('');
+    }
+
+    // Função para toggle do formulário
+    function toggleFormulario() {
+      const form = document.getElementById('formAdicionar');
+      form.classList.toggle('show');
+    }
+
+    // Função para adicionar novo ponto
+    async function adicionarPonto(event) {
+      event.preventDefault();
+      
+      const novoPonto = {
+        nome: document.getElementById('nome').value,
+        endereco: document.getElementById('endereco').value,
+        latitude: parseFloat(document.getElementById('latitude').value),
+        longitude: parseFloat(document.getElementById('longitude').value),
+        tipo: document.getElementById('tipo').value,
+        horario_funcionamento: document.getElementById('horario').value,
+        telefone: document.getElementById('telefone').value
+      };
+      
+      try {
+        const response = await fetch(`${API_URL}/pontos-coleta`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(novoPonto)
+        });
+        
+        const data = await response.json();
+        
+        if (data.sucesso) {
+          alert('Ponto de coleta adicionado com sucesso!');
+          
+          // Limpar formulário
+          event.target.reset();
+          toggleFormulario();
+          
+          // Recarregar pontos
+          if (localizacaoUsuario) {
+            await carregarPontosProximos(localizacaoUsuario.lat, localizacaoUsuario.lng);
+          } else {
+            await carregarPontos();
+          }
+        } else {
+          alert('Erro ao adicionar ponto: ' + data.erro);
+        }
+      } catch (error) {
+        console.error('Erro ao adicionar ponto:', error);
+        alert('Erro ao conectar com o servidor Python. Verifique se ele está rodando.');
+      }
+    }
+
+    // Carregar pontos ao iniciar a página
+    window.onload = () => {
+      carregarPontos();
+    };
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
