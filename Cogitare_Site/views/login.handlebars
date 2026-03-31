@@ -1,0 +1,26 @@
+<section class="login-container d-flex align-items-center justify-content-center py-5">
+    <div class="login-main-wrapper d-flex flex-md-row flex-column gap-4 align-items-stretch">
+        
+        <div class="login-form-side p-4 bg-white shadow-sm rounded-4 border">
+            <h2 class="fw-bold mb-4 text-dark">Login</h2>
+            <form action="/auth/login" method="POST">
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">E-mail</label>
+                    <input type="email" name="email" class="form-control rounded-pill" placeholder="seu@email.com" required>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label small fw-bold">Senha</label>
+                    <input type="password" name="senha" class="form-control rounded-pill" placeholder="******" required>
+                </div>
+                <button type="submit" class="btn btn-success-cogitare w-100 py-2 fw-bold">Entrar</button>
+            </form>
+        </div>
+
+        <div class="login-info-side p-4 text-white text-center d-flex flex-column justify-content-center align-items-center rounded-4 shadow-sm">
+            <i class="bi bi-person-plus-fill fs-1 mb-2"></i> <h4 class="fw-bold">Novo por aqui?</h4>
+            <p class="small mb-4">Cadastre-se para gerenciar seus medicamentos de forma consciente.</p>
+            <a href="/cadastro" class="btn btn-outline-light px-4 py-2 fw-bold btn-sm rounded-pill">Criar Conta</a>
+        </div>
+
+    </div>
+</section>

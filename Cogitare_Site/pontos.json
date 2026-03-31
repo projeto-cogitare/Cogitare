@@ -1,0 +1,20 @@
+[
+  {
+    "nome": "UBS Atalaia",
+    "endereco": "Estr. do Morro Grande, 133 - Jardim Atalaia, Cotia - SP",
+    "latitude": -23.6152,
+    "longitude": -46.9405,
+    "tipo": "UBS",
+    "horario_funcionamento": "07h às 17h",
+    "telefone": "(11) 4614-4511"
+  },
+  {
+    "nome": "Droga Raia - Centro",
+    "endereco": "Av. Prof. Manoel José Pedroso, 300 - Centro, Cotia - SP",
+    "latitude": -23.6025,
+    "longitude": -46.9230,
+    "tipo": "Farmácia",
+    "horario_funcionamento": "24h",
+    "telefone": "(11) 4703-1234"
+  }
+]
