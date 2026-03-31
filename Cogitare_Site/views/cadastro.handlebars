@@ -1,0 +1,93 @@
+<section
+  class="cadastro-wrapper d-flex align-items-center justify-content-center py-5"
+>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-xl-9">
+
+        <div
+          class="main-registration-card shadow-lg d-flex flex-column flex-md-row overflow-hidden"
+        >
+
+          <div
+            class="info-panel p-5 text-center text-white d-flex flex-column justify-content-center align-items-center"
+          >
+            <div class="mini-logo mb-4">COGITARE</div>
+            <h2 class="fw-bold display-6">Crie sua conta</h2>
+            <p class="lead-sm">Junte-se a nós para facilitar o descarte correto
+              de remédios.</p>
+            <a href="/login" class="btn btn-outline-light mt-4 px-4 fw-bold">Já
+              tenho conta</a>
+          </div>
+
+          <div class="form-panel p-5 bg-white flex-grow-1">
+            <h2 class="text-dark mb-4 fw-bold">Cadastro</h2>
+
+            <form action="/auth/cadastro" method="POST">
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="nome"
+                  class="form-control custom-input"
+                  placeholder="Nome Completo"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control custom-input"
+                  placeholder="Digite seu melhor E-mail"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="endereco"
+                  class="form-control custom-input"
+                  placeholder="Digite seu Endereço"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  type="password"
+                  name="senha"
+                  class="form-control custom-input"
+                  placeholder="Crie uma senha"
+                  required
+                />
+              </div>
+              <div class="mb-4">
+                <input
+                  type="password"
+                  name="confirmarSenha"
+                  class="form-control custom-input"
+                  placeholder="Confirme a senha"
+                  required
+                />
+              </div>
+              <div class="mb-4">
+                <label class="form-label small fw-bold">Eu sou:</label>
+                <select name="tipo" class="form-select rounded-pill" required>
+                  <option value="cliente" selected>Cidadão (Quero descartar)</option>
+                  <option value="parceiro">Farmácia/Ponto de Coleta (Parceiro)</option>
+                </select>
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-success-cogitare w-100 py-3 fw-bold text-uppercase"
+              >
+                Finalizar Cadastro
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
