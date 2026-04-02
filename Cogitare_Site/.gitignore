@@ -1,1 +1,19 @@
-App/finalTcc.rar
+# Dependências
+node_modules/
+
+# Arquivos de log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Banco de Dados de Desenvolvimento
+*.sqlite
+database.sqlite
+
+# Arquivos de ambiente
+.env
+
+# Pastas de IDE e SO
+.vscode/
+.idea/
+.DS_Store
