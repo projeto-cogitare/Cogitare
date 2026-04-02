@@ -1,0 +1,215 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   1. VARIÁVEIS E CONFIGURAÇÕES GERAIS (:root)
+   ========================================================================== */
+:root {
+    --verde-cogitare: #2e7d32;
+    --verde-claro: #4CAF50;
+    --verde-hover: #1b5e20;
+    --verde-fundo: #e8f5e9;
+    --branco: #ffffff;
+    --cinza-fundo: #f8f9fa;
+    --cinza-texto: #6c757d;
+    --sombra: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-color: var(--cinza-fundo);
+    margin: 0;
+}
+
+/* ==========================================================================
+   2. COMPONENTES GLOBAIS (Navbar, Footer, Botões)
+   ========================================================================== */
+.navbar {
+    background-color: var(--verde-claro) !important;
+    padding: 10px 40px !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-link {
+    color: var(--branco) !important;
+    font-weight: bold;
+}
+
+footer {
+    background-color: #1b4332;
+    color: var(--branco);
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.btn-custom {
+    background-color: var(--verde-cogitare);
+    color: var(--branco) !important;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-custom:hover {
+    background-color: var(--verde-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra);
+}
+
+/* ==========================================================================
+   3. PÁGINA INICIAL (Hero & Impacto)
+   ========================================================================== */
+.home-hero {
+    background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%) !important;
+    padding: 100px 0;
+    color: white !important;
+    text-align: center;
+}
+
+.home-hero h1 { font-size: 3.5rem; font-weight: 800; color: white !important; }
+
+/* ==========================================================================
+   4. COMPONENTE: FLIP CARDS (Educação Ambiental)
+   ========================================================================== */
+.flip-card {
+    background-color: transparent;
+    height: 280px;
+    perspective: 1000px;
+    margin-bottom: 30px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--sombra);
+}
+
+.flip-card-front { background: white; color: #333; }
+
+.flip-card-back {
+    background-color: var(--verde-cogitare);
+    color: var(--branco);
+    transform: rotateY(180deg);
+}
+
+/* ==========================================================================
+   5. PÁGINA: LOGIN E CADASTRO (Split-Card & Visibilidade)
+   ========================================================================== */
+.main-registration-card {
+    display: flex;
+    max-width: 950px;
+    width: 100%;
+    gap: 30px; 
+    background: transparent !important;
+}
+
+/* Painéis Verdes (Cadastro e Login) */
+.info-panel, 
+.login-info-side {
+    flex: 0.8;
+    background: linear-gradient(135deg, var(--verde-claro), var(--verde-cogitare)) !important;
+    color: white !important;
+    padding: 3rem;
+    border-radius: 25px !important;
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Garante que o texto dentro do verde seja sempre branco */
+.info-panel *, 
+.login-info-side * {
+    color: white !important;
+}
+
+.form-panel {
+    flex: 1.2;
+    background: white !important;
+    padding: 3rem;
+    border-radius: 25px !important;
+    box-shadow: var(--sombra);
+}
+
+.custom-input {
+    border-radius: 50px !important;
+    padding: 12px 20px !important;
+    border: 1px solid #ddd !important;
+}
+
+/* ==========================================================================
+   6. MÓDULO DE INVENTÁRIO (Medicamentos & Semáforo)
+   ========================================================================== */
+.medicamentos-box {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Semáforo de Validade */
+.border-danger { border-left: 8px solid #dc3545 !important; }
+.border-warning { border-left: 8px solid #ffc107 !important; }
+.border-success { border-left: 8px solid #28a745 !important; }
+
+/* ==========================================================================
+   7. PÁGINA: COLETAS (Mapa Estilo Card)
+   ========================================================================== */
+.sidebar-coletas {
+    background-color: white !important;
+    padding: 30px 20px !important;
+    border-radius: 25px;
+    box-shadow: var(--sombra);
+    height: 100%;
+    min-height: 600px;
+}
+
+#map {
+    height: 600px !important;
+    width: 100%;
+    border-radius: 25px !important; /* Arredondado total para o efeito de card */
+    z-index: 1;
+    box-shadow: var(--sombra);
+    border: none;
+}
+
+.ponto-card {
+    border: 1px solid #f0f0f0 !important;
+    margin-bottom: 12px;
+    padding: 15px;
+    border-radius: 15px;
+    transition: 0.2s;
+    background: white;
+    cursor: pointer;
+}
+
+.ponto-card:hover {
+    border-color: var(--verde-claro) !important;
+    background-color: #f9fff9;
+    transform: translateX(5px);
+}

@@ -1,19 +1,85 @@
-# Dependências
-node_modules/
+# ========================
+# Ambientes & Sistema Operacional
+# ========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
 
-# Arquivos de log
+# ========================
+# IDEs & Editores
+# ========================
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+.eslintcache
+
+# ========================
+# Node & JavaScript
+# ========================
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.npm/
 
-# Banco de Dados de Desenvolvimento
+# ========================
+# Python
+# ========================
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+ENV/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ========================
+# Pastas de build
+# ========================
+dist/
+build/
+out/
+.next/
+.nuxt/
+
+# ========================
+# Arquivos de Ambiente
+# ========================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ========================
+# Banco de Dados
+# ========================
 *.sqlite
+*.sqlite3
+*.db
+*.db3
+*.s3db
+*.sl3
 database.sqlite
 
-# Arquivos de ambiente
-.env
-
-# Pastas de IDE e SO
-.vscode/
-.idea/
-.DS_Store
+# ========================
+# Logs e Temporários
+# ========================
+*.log
+logs/
+temp/
+tmp/
+coverage/
