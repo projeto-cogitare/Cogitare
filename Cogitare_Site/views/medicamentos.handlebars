@@ -1,0 +1,92 @@
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <div class="col-md-5">
+        <div class="medicamentos-box p-3 border rounded bg-light">
+          <h5 class="mb-4 fw-bold text-success">Medicamentos Cadastrados</h5>
+          <div class="lista-remedios">
+            {{#if medicamentos}}
+                {{#each medicamentos}}
+                <div class="card mb-3 border-start border-4 
+                    {{#if estaVencido}} border-danger 
+                    {{else if estaPorExpirar}} border-warning 
+                    {{else}} border-success {{/if}}">
+                  
+                  <div class="card-body">
+                    <h5 class="card-title d-flex justify-content-between align-items-start">
+                      <span class="fw-bold">{{nome}}</span>
+                      <div>
+                        {{#if estaVencido}}
+                          <span class="badge bg-danger">VENCIDO!</span>
+                        {{else if estaPorExpirar}}
+                          <span class="badge bg-warning text-dark">EXPIRA EM BREVE</span>
+                        {{/if}}
+                      </div>
+                    </h5>
+
+                    <p class="card-text mb-1 text-muted">
+                        <strong>Tipo:</strong> {{tipo}} 
+                    </p>
+                    <p class="card-text mb-2">
+                        <strong>Validade:</strong> {{validadeFormatada}}
+                    </p>
+                    
+                    <form action="/medicamentos/deletar/{{_id}}" method="POST">
+                        <button class="btn btn-sm btn-outline-danger border-0">
+                            <i class="bi bi-trash"></i> Excluir
+                        </button>
+                    </form>
+                  </div>
+                </div>
+                {{/each}}
+            {{else}}
+              <div class="text-center py-4 text-muted">
+                <i class="bi bi-capsule h1 d-block"></i>
+                Nenhum medicamento cadastrado ainda.
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-7">
+        <div class="row align-items-center ms-md-4">
+          <div class="col-md-8">
+            <h2 class="titulo fw-bold mb-4">Cadastrar medicamentos</h2>
+
+            <form action="/medicamentos/cadastrar" method="POST">
+              <div class="mb-3">
+                <input type="text" name="nome" class="form-control" placeholder="Nome do Medicamento" required />
+              </div>
+
+              <div class="mb-3">
+                <select name="tipo" class="form-select" required>
+                  <option value="" disabled selected>Tipo de remédio</option>
+                  <option value="Comprimido">Comprimido</option>
+                  <option value="Xarope">Xarope</option>
+                  <option value="Pomada">Pomada</option>
+                  <option value="Outros">Outros</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="validade" class="form-label fw-bold text-success small">DATA DE VALIDADE</label>
+                <input type="date" name="validade" id="validade" class="form-control" required>
+              </div>
+
+              <button type="submit" class="scan-btn w-100 py-2 fw-bold">
+                <i class="bi bi-plus-circle me-2"></i> Salvar Medicamento
+              </button>
+            </form>
+          </div>
+
+          <div class="col-md-4 text-center d-none d-md-block">
+            <img src="/imagens/remedio.png" alt="Ilustração" class="img-fluid" style="max-width:200px;" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

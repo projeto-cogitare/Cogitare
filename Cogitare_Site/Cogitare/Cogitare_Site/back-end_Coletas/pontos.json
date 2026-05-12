@@ -1,0 +1,43 @@
+[
+  {
+    "id": "1",
+    "nome": "Farmácia Central",
+    "endereco": "Av. Principal, 123 - Centro",
+    "latitude": -23.6039,
+    "longitude": -46.9196,
+    "tipo": "farmacia",
+    "horario_funcionamento": "8h às 20h",
+    "telefone": "(11) 1234-5678"
+  },
+  {
+    "id": "2",
+    "nome": "UBS Jardim das Flores",
+    "endereco": "Rua das Flores, 456 - Jardim",
+    "latitude": -23.589,
+    "longitude": -46.926,
+    "tipo": "ubs",
+    "horario_funcionamento": "7h às 17h",
+    "telefone": "(11) 2345-6789"
+  },
+  {
+    "id": "3",
+    "nome": "Hospital Municipal",
+    "endereco": "Av. Saúde, 789 - Centro",
+    "latitude": -23.619,
+    "longitude": -46.905,
+    "tipo": "hospital",
+    "horario_funcionamento": "24 horas",
+    "telefone": "(11) 3456-7890"
+  },
+  
+  {
+    "id": "66510d92-a031-4d13-aa0d-e29d0f5ee5f4",
+    "nome": "Farmácia Brasil",
+    "endereco": "Rua São Paulo",
+    "latitude": -23.531266,
+    "longitude": -46.982335,
+    "tipo": "farmacia",
+    "horario_funcionamento": "",
+    "telefone": "(11) 97170-7417"
+  }
+]

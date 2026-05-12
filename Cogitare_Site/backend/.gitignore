@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Dependências
 node_modules/
 
@@ -18,8 +17,3 @@ database.sqlite
 .vscode/
 .idea/
 .DS_Store
-=======
-node_modules/
-venv/
-.env
->>>>>>> 3f5eb53abb3b724f8e153b77fce527da24790681

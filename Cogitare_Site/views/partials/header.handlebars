@@ -1,0 +1,56 @@
+<header>
+  <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="/imagens/logo.png" alt="Logo Cogitare" height="30">
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          
+          <li class="nav-item"><a class="nav-link fw-bold" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="/educacao">Educação Ambiental</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="/coletas">Como descarta</a></li>
+
+          {{!-- 🔐 Lógica de Login/Sessão --}}
+          {{#if user}}
+            
+            {{!-- 🟢 Se for PARCEIRO (Farmácia/Cláudia) --}}
+            {{#if (eq user.tipo "parceiro")}}
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-primary" href="/painel-parceiro">
+                  <i class="bi bi-speedometer2 me-1"></i>Meu Painel
+                </a>
+              </li>
+            {{else}}
+              {{!-- 🔵 Se for CLIENTE (Cidadão comum) --}}
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-success" href="/medicamentos">
+                  <i class="bi bi-qr-code-scan me-1"></i>Escanear
+                </a>
+              </li>
+            {{/if}}
+
+            {{!-- 👋 Saudação e Logout --}}
+            <li class="nav-item ms-lg-3">
+              <span class="nav-link">Olá, <strong>{{user.nome}}</strong>!</span>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-danger btn-sm rounded-pill px-3 ms-lg-2" href="/logout">Sair</a>
+            </li>
+
+          {{else}}
+            {{!-- 🔴 Visitante Deslogado --}}
+            <li class="nav-item"><a class="nav-link fw-bold" href="/cadastro">Cadastro</a></li>
+            <li class="nav-item"><a class="nav-link fw-bold" href="/login">Login</a></li>
+          {{/if}}
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
