@@ -13,13 +13,25 @@ var marcadorUsuario = null;
 
 // FUNÇÃO PARA MOSTRAR O USUÁRIO (Corrigida)
 function obterLocalizacaoAtual() {
+
+    const loading = document.getElementById("loadingMapa");
+
+    // Mostra feedback visual
+    loading.style.display = "block";
+
     if (navigator.geolocation) {
+
         navigator.geolocation.getCurrentPosition((position) => {
+
+            // Esconde loading quando terminar
+            loading.style.display = "none";
+
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
-            
-            if (marcadorUsuario) map.removeLayer(marcadorUsuario);
-            
+
+            if (marcadorUsuario)
+                map.removeLayer(marcadorUsuario);
+
             // Ícone azul especial para o usuário
             var iconEu = L.icon({
                 iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
@@ -30,16 +42,25 @@ function obterLocalizacaoAtual() {
                 shadowSize: [41, 41]
             });
 
-            marcadorUsuario = L.marker([lat, lng], {icon: iconEu}).addTo(map)
-                .bindPopup("<b>Você está aqui!</b>").openPopup();
-            
-            // Faz o mapa "voar" até a sua posição
+            marcadorUsuario = L.marker([lat, lng], { icon: iconEu }).addTo(map)
+                .bindPopup("<b>Você está aqui!</b>")
+                .openPopup();
+
+            // Faz o mapa voar até usuário
             map.flyTo([lat, lng], 15);
-            
+
         }, (error) => {
+
+            // Esconde loading em caso de erro
+            loading.style.display = "none";
+
             alert("Erro ao obter localização. Verifique se o GPS está ativo e se deu permissão ao navegador.");
         });
+
     } else {
+
+        loading.style.display = "none";
+
         alert("Seu navegador não suporta geolocalização.");
     }
 }

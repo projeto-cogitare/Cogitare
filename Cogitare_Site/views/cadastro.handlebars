@@ -24,21 +24,24 @@
             <h2 class="text-dark mb-4 fw-bold">Cadastro</h2>
 
             <form action="/auth/cadastro" method="POST">
-              <div class="mb-3">
+              <div class="mb-3 position-relative">
+
+
                 <input
-                  type="text"
-                  name="nome"
-                  class="form-control custom-input"
-                  placeholder="Nome Completo"
-                  required
+                    type="text"
+                    name="nome"
+                    class="form-control rounded-pill"
+                    placeholder="Nome Completo"
+                    required
                 />
+
               </div>
               <div class="mb-3">
                 <input
                   type="email"
                   name="email"
-                  class="form-control custom-input"
-                  placeholder="Digite seu melhor E-mail"
+                  class="form-control rounded-pill"
+                  placeholder="seu@email.com"
                   required
                 />
               </div>
@@ -46,7 +49,7 @@
                 <input
                   type="text"
                   name="endereco"
-                  class="form-control custom-input"
+                  class="form-control rounded-pill"
                   placeholder="Digite seu Endereço"
                   required
                 />
@@ -55,7 +58,7 @@
                 <input
                   type="password"
                   name="senha"
-                  class="form-control custom-input"
+                  class="form-control rounded-pill"
                   placeholder="Crie uma senha"
                   required
                 />
@@ -64,7 +67,7 @@
                 <input
                   type="password"
                   name="confirmarSenha"
-                  class="form-control custom-input"
+                  class="form-control rounded-pill"
                   placeholder="Confirme a senha"
                   required
                 />
