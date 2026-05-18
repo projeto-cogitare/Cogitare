@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - COGITARE</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4fef4;
+    }
+
+    nav.menu {
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+    }
+
+    .logo {
+      font-weight: bold;
+      background-color: #4CAF50;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 5px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: black;
+      background-color: #dcdcdc;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-links li a:hover {
+      background-color: #c0c0c0;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    .blocoverde {
+      background-color: #a6e3a1;
+      padding: 40px 20px;
+      width: 300px;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      text-align: center;
+    }
+
+    .logo-mini {
+      background-color: white;
+      display: inline-block;
+      padding: 5px 20px;
+      margin-bottom: 10px;
+      border: 2px solid green;
+      border-radius: 5px;
+    }
+
+    .blocoverde h2 {
+      margin-bottom: 10px;
+    }
+
+    .blocoverde p {
+      font-size: 14px;
+      color: #2e2e2e;
+      margin-bottom: 20px;
+    }
+
+    .btn-cadastrar {
+      padding: 10px 20px;
+      background-color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .blocologin {
+      background-color: white;
+      padding: 40px 30px;
+      width: 350px;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .blocologin h2 {
+      margin-bottom: 10px;
+      color: #2c2c2c;
+    }
+
+    .google-btn {
+      margin: 10px 0 20px 0;
+      padding: 5px 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      border: 1px solid #0e7e19;
+      border-radius: 20px;
+      padding: 5px 10px;
+    }
+
+    .form-group input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 10px;
+      border-radius: 20px;
+    }
+
+    .btn-entrar {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+  </style>
+</head>
+<body>
+  <nav class="menu">
+    <div class="logo">COGITARE</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#">Cadastro</a></li>
+      <li><a href="coletas.html">Como descarta</a></li>
+      <li><a href="medicamentosCadastro.html">Escanear</a></li>
+      <!-- <li><a href="#">Sobre Nós</a></li> -->
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="blocoverde">
+      <div class="logo-mini">COGITARE</div>
+      <h2>Bem vindo</h2>
+      <p>Para acessar o sistema é<br>necessário logar na sua conta</p>
+      <button class="btn-cadastrar">Cadastrar</button>
+    </div>
+
+    <div class="blocologin">
+      <h2>Faça o seu Login</h2>
+      <button class="google-btn">Sign in with Google</button>
+
+      <form>
+        <div class="form-group">
+          <input type="text" placeholder="Nome">
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Digite o E-mail">
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="Digite o Endereço">
+        </div>
+        <div class="form-group">
+          <input type="password" placeholder="Digite a senha">
+        </div>
+        <button type="submit" class="btn-entrar">Entrar</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
