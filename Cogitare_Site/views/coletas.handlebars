@@ -1,0 +1,28 @@
+<div class="container py-5"> <div class="row g-4"> <div class="col-lg-5">
+            <div class="sidebar-coletas shadow-sm border-0">
+                <h2 class="fw-bold mb-4 text-success">
+                    <i class="bi bi-geo-alt-fill"></i> Locais de Coletas
+                </h2>
+                <button class="btn btn-success w-100 fw-bold rounded-pill py-3 mb-4 shadow-sm" onclick="obterLocalizacaoAtual()">
+                    <i class="bi bi-cursor-fill me-2"></i> Onde eu estou agora?
+                </button>
+                <div id="lista-pontos" class="custom-scrollbar" style="max-height: 500px; overflow-y: auto;">
+                    </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div id="map" style="height: 550px; width: 100%;"></div>
+            </div>
+            
+            <div class="alert alert-success border-0 shadow-sm mt-4 rounded-4 p-4">
+                <h5 class="fw-bold text-success"><i class="bi bi-info-circle me-2"></i>Por que descartar corretamente?</h5>
+                <p class="mb-0 text-muted small">
+                    Remédios descartados incorretamente contaminam o solo e os lençóis freáticos de Cotia, afetando a saúde de toda a comunidade.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>

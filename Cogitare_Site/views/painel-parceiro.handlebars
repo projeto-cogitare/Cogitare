@@ -1,0 +1,92 @@
+<div class="container py-5">
+    <div class="row mb-5 align-items-center">
+        <div class="col-md-8">
+            <h1 class="fw-bold text-success display-5">Painel do Parceiro</h1>
+            <p class="text-muted fs-5">Olá, <strong>{{usuario.nome}}</strong>. Confira o impacto ambiental da sua unidade.</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <a href="/logout" class="btn btn-outline-danger rounded-pill px-4 fw-bold shadow-sm">
+                <i class="bi bi-box-arrow-right me-2"></i>Sair
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="bg-success text-white rounded-3 p-3 me-3">
+                        <i class="bi bi-capsule fs-3"></i>
+                    </div>
+                    <h6 class="mb-0 fw-bold">Medicamentos</h6>
+                </div>
+                <h2 class="fw-bold">{{stats.totalRecebido}}</h2>
+                <p class="text-muted small mb-0">Total de itens recebidos</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="bg-primary text-white rounded-3 p-3 me-3">
+                        <i class="bi bi-water fs-3"></i>
+                    </div>
+                    <h6 class="mb-0 fw-bold">Preservação</h6>
+                </div>
+                <h2 class="fw-bold">{{stats.kgEvitados}}</h2>
+                <p class="text-muted small mb-0">De resíduos fora do esgoto</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white border-start border-success border-5">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="bg-warning text-dark rounded-3 p-3 me-3">
+                        <i class="bi bi-star-fill fs-3"></i>
+                    </div>
+                    <h6 class="mb-0 fw-bold">Status</h6>
+                </div>
+                <h2 class="fw-bold">Ouro</h2>
+                <p class="text-muted small mb-0">Nível de engajamento ambiental</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 p-5 bg-white h-100">
+                <h4 class="fw-bold mb-4"><i class="bi bi-geo-alt-fill text-success me-2"></i>Seu Ponto no Mapa</h4>
+                <div class="p-4 bg-light rounded-4 mb-4">
+                    <p class="mb-1"><strong>Endereço Cadastrado:</strong> {{usuario.endereco}}</p>
+                    <p class="mb-0 text-muted small">Sua farmácia aparece no mapa para todos os usuários de Cotia.</p>
+                </div>
+                <div class="d-grid gap-2">
+                    <a href="/coletas" class="btn btn-custom py-3 text-white">
+                        <i class="bi bi-map me-2"></i>Ver ou Editar Localização
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 bg-dark text-white h-100">
+                <h5 class="fw-bold mb-4 text-success">Guia de Procedimentos</h5>
+                <ul class="list-unstyled small">
+                    <li class="mb-3 d-flex align-items-start">
+                        <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                        <span>Receba apenas medicamentos domiciliares.</span>
+                    </li>
+                    <li class="mb-3 d-flex align-items-start">
+                        <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                        <span>Mantenha as bombonas lacradas.</span>
+                    </li>
+                    <li class="mb-0 d-flex align-items-start">
+                        <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                        <span>Sempre utilize luvas no manejo.</span>
+                    </li>
+                </ul>
+                <div class="mt-4 pt-4 border-top border-secondary">
+                    <p class="x-small opacity-50 mb-0 text-center">FATEC Cotia & Cogitare - 2026</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
