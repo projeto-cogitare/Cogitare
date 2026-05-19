@@ -1,0 +1,28 @@
+# Lista de Melhorias Futuras (Discussão em Grupo)
+
+Estas são algumas sugestões arquiteturais para debater back-end em Node.js (MVC) e Sequelize:
+
+## 1. Unificação de Rotas Relacionadas (Filtros via Query params)
+Atualmente temos as seguintes consultas no front-end:
+- `/api/medicamentos/alertas`
+- `/api/medicamentos/vencidos`
+
+Ambas são apenas "filtros" sobre os dados de medicamentos. O ideal em uma API REST moderna é ter um ponto principal:
+- `GET /api/medicamentos`
+E passar Filtros:
+- `GET /api/medicamentos?status=alertas`
+- `GET /api/medicamentos?status=vencidos`
+Isso simplifica muito o "Controller" e permite a combinação de consultas (ex: "vencidos de hoje", "alertas dessa semana").
+
+## 2. Abstração de Regras de Negócio (Services)
+Atualmente, a lógica pesada (exemplo: cálculo das distâncias Haversine dos pontos de coleta ou cálculo dos 30 dias de validade) fica dentro dos **Controllers**. O ideal futuro é subir para um padrão **Service Pattern**:
+- `MedicamentosService.js`: contendo apenas lógica pura e cálculos.
+- E os *Controllers* ficam enxutos apenas orquestrando as Requests e Reponses Express. Lógica pura será mais fácil de ser testada!
+
+## 3. Definição de Database
+Uso de banco (provavelmente MongoDB) não relacional
+
+## 4. escalabilidade (caso fosse um projeto profissional)
+Refatorar funções de busca de medicamentos e pontos de coleta para que sejam mais escaláveis, utilizando técnicas de cache e otimização de consultas.
+
+---

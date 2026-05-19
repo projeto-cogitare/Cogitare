@@ -1,1 +1,3 @@
-App/finalTcc.rar
+node_modules/
+venv/
+.env
