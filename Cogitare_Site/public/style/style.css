@@ -40,6 +40,7 @@ body {
 
 .nav-link:hover {
     opacity: 0.8;
+    
 }
 
 .nav-link::after {
@@ -107,6 +108,34 @@ footer {
         background 0.25s ease;
 
     cursor: pointer;
+}
+
+.input-group-text {
+
+    border-radius: 50px 0 0 50px !important;
+
+    background-color: white;
+
+    border-right: none;
+
+    color: var(--verde-cogitare);
+
+    padding-left: 18px;
+}
+
+.input-group .form-control {
+
+    border-left: none;
+
+    border-radius: 0 50px 50px 0 !important;
+}
+
+.input-group:focus-within {
+
+    box-shadow:
+        0 0 0 4px rgba(76, 175, 80, 0.15);
+
+    border-radius: 50px;
 }
 
 /* Hover */

@@ -24,56 +24,107 @@
             <h2 class="text-dark mb-4 fw-bold">Cadastro</h2>
 
             <form action="/auth/cadastro" method="POST">
-              <div class="mb-3 position-relative">
+              <div class="mb-3">
 
+                <div class="input-group">
 
-                <input
+                  <span class="input-group-text">
+                    <i class="bi bi-person-fill"></i>
+                  </span>
+
+                  <input
                     type="text"
                     name="nome"
                     class="form-control rounded-pill"
                     placeholder="Nome Completo"
                     required
-                />
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+
+                <div class="input-group">
+
+                  <span class="input-group-text">
+                    <i class="bi bi-envelope-fill"></i>
+                  </span>
+
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control rounded-pill"
+                    placeholder="seu@email.com"
+                    required
+                  />
+
+                </div>
 
               </div>
               <div class="mb-3">
-                <input
-                  type="email"
-                  name="email"
-                  class="form-control rounded-pill"
-                  placeholder="seu@email.com"
-                  required
-                />
+
+                <div class="input-group">
+
+                  <span class="input-group-text">
+                    <i class="bi bi-geo-alt-fill"></i>
+                  </span>
+
+                  <input
+                    type="text"
+                    name="endereco"
+                    class="form-control rounded-pill"
+                    placeholder="Digite seu Endereço"
+                    required
+                  />
+
+                </div>
+
               </div>
               <div class="mb-3">
-                <input
-                  type="text"
-                  name="endereco"
-                  class="form-control rounded-pill"
-                  placeholder="Digite seu Endereço"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <input
-                  type="password"
-                  name="senha"
-                  class="form-control rounded-pill"
-                  placeholder="Crie uma senha"
-                  required
-                />
-              </div>
-              <div class="mb-4">
-                <input
-                  type="password"
-                  name="confirmarSenha"
-                  class="form-control rounded-pill"
-                  placeholder="Confirme a senha"
-                  required
-                />
+
+                <div class="input-group">
+
+                  <span class="input-group-text">
+                    <i class="bi bi-lock-fill"></i>
+                  </span>
+
+                  <input
+                    type="password"
+                    name="senha"
+                    class="form-control rounded-pill"
+                    placeholder="Crie uma senha"
+                    required
+                  />
+
+                </div>
+
               </div>
               <div class="mb-4">
-                <label class="form-label small fw-bold">Eu sou:</label>
+
+                <div class="input-group">
+
+                  <span class="input-group-text">
+                    <i class="bi bi-shield-check"></i>
+                  </span>
+
+                  <input
+                    type="password"
+                    name="confirmarSenha"
+                    class="form-control rounded-pill"
+                    placeholder="Confirme a senha"
+                    required
+                  />
+
+                </div>
+
+              </div>
+              <div class="mb-4">
+                <label class="form-label small fw-bold">
+
+                  <i class="bi bi-person"></i>
+
+                  Eu sou:
+
+                </label>
                 <select name="tipo" class="form-select rounded-pill" required>
                   <option value="cliente" selected>Cidadão (Quero descartar)</option>
                   <option value="parceiro">Farmácia/Ponto de Coleta (Parceiro)</option>
