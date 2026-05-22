@@ -12,9 +12,26 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-center">
           
-          <li class="nav-item"><a class="nav-link fw-bold" href="/">Home</a></li>
-          <li class="nav-item"><a class="nav-link fw-bold" href="/educacao">Educação Ambiental</a></li>
-          <li class="nav-item"><a class="nav-link fw-bold" href="/coletas">Como descarta</a></li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="/"
+              <i class="bi bi-house"></i>>
+              Home
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="/educacao">
+              <i class="bi bi-book-half me-1"></i>
+              Educação Ambiental
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="/coletas">
+              <i class="bi bi-recycle me-1"></i>
+              Descartar
+            </a>
+          </li>
 
           {{!-- 🔐 Lógica de Login/Sessão --}}
           {{#if user}}
@@ -37,16 +54,42 @@
 
             {{!-- 👋 Saudação e Logout --}}
             <li class="nav-item ms-lg-3">
-              <span class="nav-link">Olá, <strong>{{user.nome}}</strong>!</span>
+              {{#if (eq user.tipo "parceiro")}}
+                <a href="/painel-parceiro">
+                  <span class="nav-link">
+                    Olá, <strong>{{user.nome}}</strong>!
+                  </span>
+                </a>
+              {{else}}
+                <a href="/painel-cliente">
+                  <span class="nav-link">
+                    Olá, <strong>{{user.nome}}</strong>!
+                  </span>
+                </a>
+              {{/if}}
             </li>
             <li class="nav-item">
-              <a class="btn btn-outline-danger btn-sm rounded-pill px-3 ms-lg-2" href="/logout">Sair</a>
+              <a class="btn btn-outline-danger btn-sm rounded-pill px-3 ms-lg-2" href="/logout">
+                <i class="bi bi-box-arrow-right me-1"></i>
+                Sair
+              </a>
             </li>
 
           {{else}}
             {{!-- 🔴 Visitante Deslogado --}}
-            <li class="nav-item"><a class="nav-link fw-bold" href="/cadastro">Cadastro</a></li>
-            <li class="nav-item"><a class="nav-link fw-bold" href="/login">Login</a></li>
+            <li class="nav-item">
+              <a class="nav-link fw-bold" href="/cadastro">
+                <i class="bi bi-person-plus-fill me-1"></i>
+                Cadastro
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link fw-bold" href="/login">
+                <i class="bi bi-box-arrow-in-right me-1"></i>
+                Login
+              </a>
+            </li>
           {{/if}}
 
         </ul>
