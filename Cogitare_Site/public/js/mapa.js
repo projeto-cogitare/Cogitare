@@ -9,6 +9,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 setTimeout(() => { map.invalidateSize(); }, 500);
 
 var marcadores = [];
+var todosPontos = [];
 var marcadorUsuario = null;
 
 // FUNÇÃO PARA MOSTRAR O USUÁRIO (Corrigida)
@@ -71,20 +72,42 @@ async function carregarPontos() {
         const response = await fetch(`${API_URL}/pontos-coleta`);
         const data = await response.json();
         
-        const lista = document.getElementById('lista-pontos');
         if (data.sucesso) {
-            exibirNoMapa(data.pontos);
-            exibirNaLista(data.pontos);
+            todosPontos = data.pontos;
+            exibirPontos(todosPontos);
+            adicionarFiltroDePontos();
         }
     } catch (error) {
         console.error(error);
     }
 }
 
+function adicionarFiltroDePontos() {
+    const filtro = document.getElementById('filtroPontos');
+    if (!filtro) return;
+
+    filtro.addEventListener('keyup', function() {
+        const termo = this.value.toLowerCase();
+        const pontosFiltrados = todosPontos.filter(p => {
+            return p.nome.toLowerCase().includes(termo) || p.endereco.toLowerCase().includes(termo);
+        });
+        exibirPontos(pontosFiltrados);
+    });
+}
+
+function exibirPontos(pontos) {
+    exibirNoMapa(pontos);
+    exibirNaLista(pontos);
+}
+
 function exibirNoMapa(pontos) {
+    marcadores.forEach(marker => map.removeLayer(marker));
+    marcadores = [];
+
     pontos.forEach(p => {
-        L.marker([p.latitude, p.longitude]).addTo(map)
+        const marker = L.marker([p.latitude, p.longitude]).addTo(map)
             .bindPopup(`<b>${p.nome}</b><br>${p.endereco}`);
+        marcadores.push(marker);
     });
 }
 

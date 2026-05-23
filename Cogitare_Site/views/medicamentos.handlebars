@@ -1,10 +1,13 @@
 <section class="py-5">
   <div class="container">
-    <div class="row align-items-center">
+    <div class="row align-items-start">
 
       <div class="col-md-5">
         <div class="medicamentos-box p-3 border rounded bg-light">
           <h5 class="mb-4 fw-bold text-success">Medicamentos Cadastrados</h5>
+          <div class="mb-3">
+              <input type="text" id="filtroRemedios" class="form-control rounded-pill" placeholder=" Buscar medicamento...">
+          </div>
           <div class="lista-remedios">
             {{#if medicamentos}}
                 {{#each medicamentos}}
@@ -31,15 +34,36 @@
                     <p class="card-text mb-2">
                         <strong>Validade:</strong> {{validadeFormatada}}
                     </p>
-                    
-                    <form action="/medicamentos/deletar/{{_id}}" method="POST">
-                        <button class="btn btn-sm btn-outline-danger border-0">
-                            <i class="bi bi-trash"></i> Excluir
-                        </button>
-                    </form>
+                    <button type="button" class="btn btn-sm btn-outline-danger border-0 btn-open-delete" data-id="{{_id}}" data-name="{{nome}}" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                      <i class="bi bi-trash"></i> Excluir
+                    </button>
                   </div>
                 </div>
                 {{/each}}
+                <!-- Modal único reutilizável -->
+                <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content border-0 shadow-lg">
+                      <div class="modal-header bg-danger text-white border-0">
+                        <h5 class="modal-title fw-bold" id="confirmDeleteLabel"><i class="bi bi-exclamation-triangle-fill me-2"></i>Confirmar Exclusão</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body text-center py-4">
+                        <p class="fs-5 mb-1">Tem certeza que deseja excluir o medicamento</p>
+                        <p class="fs-4 fw-bold text-dark" id="confirmDeleteName"></p>
+                        <p class="text-muted small mb-0">Esta ação não poderá ser desfeita.</p>
+                      </div>
+                      <div class="modal-footer bg-light justify-content-center border-0">
+                        <button type="button" class="btn btn-secondary px-4 rounded-pill" data-bs-dismiss="modal">Cancelar</button>
+                        <form id="deleteForm" action="#" method="POST">
+                          <button type="submit" class="btn btn-sm btn-outline-danger border-0">
+                            <i class="bi bi-trash"></i>Sim, Excluir
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             {{else}}
               <div class="text-center py-4 text-muted">
                 <i class="bi bi-capsule h1 d-block"></i>
@@ -51,7 +75,7 @@
       </div>
 
       <div class="col-md-7">
-        <div class="row align-items-center ms-md-4">
+        <div class="row align-items-start ms-md-4">
           <div class="col-md-8">
             <h2 class="titulo fw-bold mb-4">Cadastrar medicamentos</h2>
 
@@ -75,7 +99,7 @@
                 <input type="date" name="validade" id="validade" class="form-control" required>
               </div>
 
-              <button type="submit" class="scan-btn w-100 py-2 fw-bold">
+              <button type="submit" class="btn btn-success-cogitare w-100 py-2 fw-bold rounded-pill">
                 <i class="bi bi-plus-circle me-2"></i> Salvar Medicamento
               </button>
             </form>
@@ -90,3 +114,18 @@
     </div>
   </div>
 </section>
+<script>
+document.getElementById('filtroRemedios').addEventListener('keyup', function() {
+    let termo = this.value.toLowerCase();
+    let cards = document.querySelectorAll('.lista-remedios .card');
+
+    cards.forEach(card => {
+        let nomeRemedio = card.querySelector('.card-title span').innerText.toLowerCase();
+        if (nomeRemedio.includes(termo)) {
+            card.style.display = 'block'; // Mostra o card
+        } else {
+            card.style.display = 'none'; // Esconde o card
+        }
+    });
+});
+</script>
