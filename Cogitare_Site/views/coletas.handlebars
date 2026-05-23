@@ -3,9 +3,13 @@
                 <h2 class="fw-bold mb-4 text-success">
                     <i class="bi bi-geo-alt-fill"></i> Locais de Coletas
                 </h2>
-                <button class="btn btn-success w-100 fw-bold rounded-pill py-3 mb-4 shadow-sm" onclick="obterLocalizacaoAtual()">
+                <button class="btn btn-success-cogitare w-100 fw-bold rounded-pill py-3 mb-4 shadow-sm" onclick="obterLocalizacaoAtual()">
                     <i class="bi bi-cursor-fill me-2"></i> Onde eu estou agora?
                 </button>
+
+                <div class="mb-3">
+                    <input id="filtroPontos" type="text" class="form-control rounded-pill" placeholder="Buscar ponto de coleta...">
+                </div>
 
                 <div id="loadingMapa" class="loading-mapa" style="display: none;">
                     <i class="bi bi-geo-alt-fill"></i>

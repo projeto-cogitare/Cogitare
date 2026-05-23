@@ -65,7 +65,7 @@ footer {
     text-align: center;
 }
 
-.btn-custom {
+.btn-success-cogitare, .btn-custom {
     background-color: var(--verde-cogitare);
     color: var(--branco) !important;
     padding: 12px 25px;
@@ -80,7 +80,7 @@ footer {
     display: inline-block;
 }
 
-.btn-custom:hover {
+.btn-success-cogitare:hover, .btn-custom:hover {
     background-color: var(--verde-hover);
     transform: translateY(-3px) scale(1.03);
     box-shadow: 0 12px 20px rgba(0,0,0,0.15);
@@ -95,7 +95,7 @@ footer {
     border-color: white !important;
 }
 
-.btn-custom:active {
+.btn-success-cogitare:active, .btn-custom:active {
     transform: scale(0.97);
 }
 
