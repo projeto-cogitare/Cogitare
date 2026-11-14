@@ -1,4 +1,6 @@
-<div class="container py-5"> <div class="row g-4"> <div class="col-lg-5">
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-lg-5">
             <div class="sidebar-coletas shadow-sm border-0">
                 <h2 class="fw-bold mb-4 text-success">
                     <i class="bi bi-geo-alt-fill"></i> Locais de Coletas
@@ -12,7 +14,7 @@
                     Buscando sua localização...
                 </div>
                 <div id="lista-pontos" class="custom-scrollbar" style="max-height: 500px; overflow-y: auto;">
-                    </div>
+                </div>
             </div>
         </div>
 
@@ -28,6 +30,19 @@
                 </p>
             </div>
         </div>
-
     </div>
+</div>
+
+{{!-- Widget Flutuante de Controle do Teste A/B --}}
+<div class="position-fixed bottom-0 end-0 m-3 p-3 bg-white border border-secondary-subtle rounded-4 shadow-lg" style="z-index: 1050; max-width: 320px;">
+    <div class="d-flex align-items-center justify-content-between mb-1">
+        <span class="badge bg-secondary text-uppercase fw-bold"><i class="bi bi-flask me-1"></i>Teste A/B: Versão A</span>
+        <span class="badge bg-light text-muted border">Controle</span>
+    </div>
+    <p class="small text-muted mb-2" style="font-size: 0.78rem;">
+        Versão de controle atual: sem busca de texto, sem filtros rápidos e sem status de funcionamento.
+    </p>
+    <a href="/coletas?v=b" class="btn btn-sm btn-outline-success w-100 fw-bold">
+        <i class="bi bi-arrow-left-right me-1"></i> Alternar para Versão B (UX)
+    </a>
 </div>

@@ -1,12 +1,12 @@
 const API_URL = '/api';
-var map = L.map('map').setView([-23.6039, -46.9196], 13);
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap'
-}).addTo(map);
-
-// Força o mapa a ocupar todo o espaço
-setTimeout(() => { map.invalidateSize(); }, 500);
+var map = null;
+if (document.getElementById('map')) {
+    map = L.map('map').setView([-23.6039, -46.9196], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+    setTimeout(() => { map.invalidateSize(); }, 500);
+}
 
 var marcadores = [];
 var marcadorUsuario = null;
