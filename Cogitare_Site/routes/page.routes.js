@@ -9,6 +9,8 @@ router.get("/login", PageController.renderLogin);
 router.get("/cadastro", PageController.renderCadastro);
 router.get("/educacao", PageController.renderEducacao);
 router.get("/coletas", PageController.renderColetas);
+router.get("/coletas-a", (req, res) => { req.session.ab_versao = "A"; res.redirect("/coletas?v=a"); });
+router.get("/coletas-b", (req, res) => { req.session.ab_versao = "B"; res.redirect("/coletas?v=b"); });
 
 // Rotas privadas de painel
 router.get("/painel-cliente", estaLogado, PageController.renderPainelCliente);

@@ -1,0 +1,91 @@
+<div class="container py-5">
+    <div class="row g-4">
+        {{!-- Painel Lateral com Filtros e Busca --}}
+        <div class="col-lg-5">
+            <div class="sidebar-coletas shadow-sm border-0 p-3 bg-white rounded-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h2 class="fw-bold text-success mb-0 fs-4">
+                        <i class="bi bi-geo-alt-fill me-1"></i> Locais de Coleta
+                    </h2>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1">
+                        <i class="bi bi-lightning-charge-fill me-1"></i>Busca Rápida
+                    </span>
+                </div>
+
+                {{!-- 1. Barra de Busca Instantânea por Texto --}}
+                <div class="input-group mb-3 shadow-sm rounded-pill overflow-hidden border">
+                    <span class="input-group-text bg-white border-0 ps-3 text-muted">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" id="filtro-busca" class="form-control border-0 py-2 ps-1" 
+                           placeholder="Digite o bairro, rua ou nome do local..." onkeyup="filtrarPontos()">
+                    <button class="btn btn-outline-secondary border-0 pe-3" type="button" onclick="limparBusca()" title="Limpar busca">
+                        <i class="bi bi-x-circle"></i>
+                    </button>
+                </div>
+
+                {{!-- 2. Chips de Filtro Rápido --}}
+                <div class="d-flex flex-wrap gap-2 mb-3" id="chips-container">
+                    <button class="btn btn-sm btn-success rounded-pill px-3 py-1 btn-chip active" data-filtro="todos" onclick="setFiltroTipo('todos', this)">
+                        <i class="bi bi-grid-fill me-1"></i> Todos (<span id="count-todos">0</span>)
+                    </button>
+                    <button class="btn btn-sm btn-outline-success rounded-pill px-3 py-1 btn-chip" data-filtro="aberto" onclick="setFiltroTipo('aberto', this)">
+                        <span class="text-success fw-bold">●</span> Abertos Agora (<span id="count-aberto">0</span>)
+                    </button>
+                    <button class="btn btn-sm btn-outline-success rounded-pill px-3 py-1 btn-chip" data-filtro="UBS" onclick="setFiltroTipo('UBS', this)">
+                        <i class="bi bi-hospital me-1"></i> UBS (<span id="count-ubs">0</span>)
+                    </button>
+                    <button class="btn btn-sm btn-outline-success rounded-pill px-3 py-1 btn-chip" data-filtro="Farmácia" onclick="setFiltroTipo('Farmácia', this)">
+                        <i class="bi bi-capsule me-1"></i> Farmácias (<span id="count-farmacia">0</span>)
+                    </button>
+                </div>
+
+                {{!-- 3. Botão GPS --}}
+                <button class="btn btn-outline-success w-100 fw-bold rounded-pill py-2 mb-3 shadow-sm" onclick="obterLocalizacaoAtual()">
+                    <i class="bi bi-cursor-fill me-2"></i> Usar Minha Localização Atual
+                </button>
+
+                {{!-- Feedback de Loading --}}
+                <div id="loadingMapa" class="loading-mapa text-center py-2 text-muted" style="display: none;">
+                    <div class="spinner-border spinner-border-sm text-success me-2" role="status"></div>
+                    Buscando sua localização...
+                </div>
+
+                {{!-- 4. Lista Dinâmica de Pontos com Cards Ricos --}}
+                <div id="lista-pontos" class="custom-scrollbar" style="max-height: 480px; overflow-y: auto; padding-right: 4px;">
+                </div>
+            </div>
+        </div>
+
+        {{!-- Mapa Interativo --}}
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div id="map" style="height: 600px; width: 100%;"></div>
+            </div>
+            
+            <div class="alert alert-success border-0 shadow-sm mt-3 rounded-4 p-3 d-flex align-items-center">
+                <i class="bi bi-shield-check fs-2 text-success me-3"></i>
+                <div>
+                    <h6 class="fw-bold text-success mb-1">Pontos de Coleta Verificados de Cotia - SP</h6>
+                    <p class="mb-0 text-muted small">
+                        Todos os locais listados possuem coletores adequados para comprimidos, frascos e pomadas, em conformidade com as diretrizes da ANVISA.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Widget Flutuante de Controle do Teste A/B --}}
+<div class="position-fixed bottom-0 end-0 m-3 p-3 bg-white border border-success border-2 rounded-4 shadow-lg" style="z-index: 1050; max-width: 320px;">
+    <div class="d-flex align-items-center justify-content-between mb-1">
+        <span class="badge bg-success text-uppercase fw-bold"><i class="bi bi-check-circle-fill me-1"></i>Teste A/B: Versão B</span>
+        <span class="badge bg-success-subtle text-success border border-success-subtle">Otimizada</span>
+    </div>
+    <p class="small text-muted mb-2" style="font-size: 0.78rem;">
+        Versão aprimorada com busca em tempo real, chips de filtro rápido e status de horário.
+    </p>
+    <a href="/coletas?v=a" class="btn btn-sm btn-outline-secondary w-100 fw-bold">
+        <i class="bi bi-arrow-left-right me-1"></i> Alternar para Versão A (Controle)
+    </a>
+</div>
